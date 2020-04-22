@@ -96,3 +96,50 @@ class MapSampleState extends State<MapSample> {
 //    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
 //  }
 }
+
+class LandingPage extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    return new Material(
+      color: Colors.lightBlue,
+      child: new InkWell(
+        onTap: () => print("We tapped"),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Text("Welcome to the COVID Assistant", style: new TextStyle(color: Colors.white, fontSize: 50.0, fontWeight: FontWeight.bold),),
+            new Text("Tap anywhere to continue", style: new TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),)
+          ]
+        ),
+      ),
+    );
+  }
+
+}
+
+class mainPage extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('COVID-19 Assistant')
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            new RaisedButton.icon(
+                onPressed: null,
+                icon: Icon(
+                  Icons.calendar_today
+                ),
+                label: Text('Schedule Activities'))
+          ],
+        ),
+      ),
+
+    );
+  }
+
+}
