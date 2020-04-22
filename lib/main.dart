@@ -59,7 +59,7 @@ class MapSampleState extends State<MapSample> {
       body: Column(
         children: <Widget>[
           Container(
-            height: 300,
+            height: 500,
             child: GoogleMap(
               mapType: MapType.hybrid,
               initialCameraPosition: _kGooglePlex,
@@ -69,11 +69,11 @@ class MapSampleState extends State<MapSample> {
             ),
           ),
           (currentLocation == null)
-              ? Text("nothing")
+              ? Text("nothing yet")
               : Text("Current Lat: " +
-                  currentLocation.latitude.toString() +
-                  "      Current Lon: " +
-                  currentLocation.longitude.toString())
+              currentLocation.latitude.toString() +
+              "      Current Lon: " +
+              currentLocation.longitude.toString())
         ],
       ),
 
