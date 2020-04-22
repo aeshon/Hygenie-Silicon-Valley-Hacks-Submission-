@@ -59,7 +59,7 @@ class MapSampleState extends State<MapSample> {
       body: Column(
         children: <Widget>[
           Container(
-            height: 500,
+            height: 550,
             child: GoogleMap(
               mapType: MapType.hybrid,
               initialCameraPosition: _kGooglePlex,
