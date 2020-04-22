@@ -69,11 +69,11 @@ class MapSampleState extends State<MapSample> {
             ),
           ),
           (currentLocation == null)
-              ? Text("nothing yet")
+              ? Text("nothing")
               : Text("Current Lat: " +
-              currentLocation.latitude.toString() +
-              "      Current Lon: " +
-              currentLocation.longitude.toString())
+                  currentLocation.latitude.toString() +
+                  "      Current Lon: " +
+                  currentLocation.longitude.toString())
         ],
       ),
 
