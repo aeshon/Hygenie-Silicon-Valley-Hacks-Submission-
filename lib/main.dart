@@ -110,8 +110,8 @@ class LandingPage extends StatelessWidget{
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text("Welcome to the COVID Assistant", style: new TextStyle(color: Colors.white, fontSize: 50.0, fontWeight: FontWeight.bold),),
-            new Text("Tap anywhere to continue", style: new TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),)
+            new Text("Welcome to the COVID Assistant", style: new TextStyle(color: Colors.white, fontSize: 40.0, fontWeight: FontWeight.bold),),
+            new Text("Tap anywhere to continue", style: new TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),)
           ]
         ),
       ),
@@ -133,29 +133,45 @@ class MainPage extends StatelessWidget{
       ),
       body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new RaisedButton.icon(
+            new ButtonTheme(
+              minWidth: 200.0,
+              height: 100.0,
+              child: RaisedButton.icon(
+                      onPressed: () => Navigator.push(context, route1),
+                      color: Colors.lightBlue,
+                      icon: Icon(
+                          Icons.calendar_today
+                      ),
+                      label: Text('Schedule Activities', style: new TextStyle(color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold)),
+                ),
+            ),
+            new ButtonTheme(
+              minWidth: 200.0,
+              height: 100.0,
+              child: RaisedButton.icon(
                 onPressed: () => Navigator.push(context, route1),
                 color: Colors.lightBlue,
                 icon: Icon(
-                  Icons.calendar_today
+                    Icons.edit_location
                 ),
-                label: Text('Schedule Activities', style: new TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold))
+                label: Text('Configure Location', style: new TextStyle(color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold)),
+              ),
             ),
-            new RaisedButton.icon(
-                onPressed: () => Navigator.push(context, route2),
+            new ButtonTheme(
+              minWidth: 200.0,
+              height: 100.0,
+              child: RaisedButton.icon(
+                onPressed: () => Navigator.push(context, route1),
                 color: Colors.lightBlue,
                 icon: Icon(
-                  Icons.edit_location
+                    Icons.search
                 ),
-                label: Text('Configure Location', style: new TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold))),
-            new RaisedButton.icon(
-                onPressed: () => Navigator.push(context, route3),
-                color: Colors.lightBlue,
-                icon: Icon(
-                  Icons.search
-                ),
-                label: Text('How to make your own PPE!', style: new TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),))
+                label: Text('How to get/make PPE', style: new TextStyle(color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold)),
+              ),
+            ),
           ],
         ),
       ),
