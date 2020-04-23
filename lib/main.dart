@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -122,6 +123,9 @@ class MainPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    Route route1 = MaterialPageRoute(builder: (context) => ScheduleActivitiesPage());
+    Route route2 = MaterialPageRoute(builder: (context) => ConfigureLocationPage());
+    Route route3 = MaterialPageRoute(builder: (context) => FindPPEPage());
     return Scaffold(
       appBar: AppBar(
         title: Text('COVID-19 Assistant'),
@@ -131,27 +135,60 @@ class MainPage extends StatelessWidget{
         child: Column(
           children: <Widget>[
             new RaisedButton.icon(
-                onPressed: null,
+                onPressed: () => Navigator.push(context, route1),
+                color: Colors.lightBlue,
                 icon: Icon(
                   Icons.calendar_today
                 ),
-                label: Text('Schedule Activities')
+                label: Text('Schedule Activities', style: new TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold))
             ),
             new RaisedButton.icon(
-                onPressed: null,
+                onPressed: () => Navigator.push(context, route2),
+                color: Colors.lightBlue,
                 icon: Icon(
                   Icons.edit_location
                 ),
-                label: Text('Configure Location')),
+                label: Text('Configure Location', style: new TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold))),
             new RaisedButton.icon(
-                onPressed: null,
+                onPressed: () => Navigator.push(context, route3),
+                color: Colors.lightBlue,
                 icon: Icon(
                   Icons.search
                 ),
-                label: Text('How to make your own PPE!'))
+                label: Text('How to make your own PPE!', style: new TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),))
           ],
         ),
       ),
     );
   }
+}
+
+class ScheduleActivitiesPage extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
+
+}
+
+class ConfigureLocationPage extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
+
+}
+
+class FindPPEPage extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
+
 }
