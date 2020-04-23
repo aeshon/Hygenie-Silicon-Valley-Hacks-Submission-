@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "545081628601",
+    "firebase_url": "https://covid-notification-assistant.firebaseio.com",
+    "project_id": "covid-notification-assistant",
+    "storage_bucket": "covid-notification-assistant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545081628601:android:a1d515c49ff6dd7ed00868",
+        "android_client_info": {
+          "package_name": "com.covidassistant.covidnotifassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545081628601-ghu6ce1lhr7niq3q2evfm1jnavjlkcfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACV27pMBHoQIXKvBp5G_0kT51bWjHNSZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545081628601-ghu6ce1lhr7niq3q2evfm1jnavjlkcfb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "545081628601-i46ivbr843amvvj3qr7psqn4dl1aoeg8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.covidassistant.covidnotifassistant"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
