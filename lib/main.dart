@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:math' show cos, sqrt, asin;
 
 void main() => runApp(MyApp());
 
@@ -26,21 +28,24 @@ class MapSample extends StatefulWidget {
 
 class MapSampleState extends State<MapSample> {
   Completer<GoogleMapController> _controller = Completer();
-  LocationData currentLocation;
-  Location location;
+  LocationData _currentLocation;
+  Location _location;
   FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-//  FirebaseMessaging _fcm = FirebaseMessaging();
+  double _distanceBetween;
+  bool isAtHome = true;
+  static final CameraPosition _shreyasHome = CameraPosition(
+    target: LatLng(37.2718878,-122.0225271),
+    zoom: 14.4746,
+  );
+  static final CameraPosition _shreyasNeighborHome = CameraPosition(
+    target: LatLng(37.2719611,-122.0238443),
+    zoom: 14.4746,
+  );
 
   void initState() {
     super.initState();
-    Fluttertoast.showToast(
-        msg: "changed location",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-    location = new Location();
+
+    _location = new Location();
 
     var initializationSettingsAndroid = new AndroidInitializationSettings('app_icon');
     var initializationSettingsIOS = new IOSInitializationSettings();
@@ -48,35 +53,44 @@ class MapSampleState extends State<MapSample> {
     _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
 
     _flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: _onSelectNotification);
-//    _fcm.configure(
-//      onMessage: (Map<String, dynamic> message) async {
-//        print("onMessage: $message");
-//        showDialog(
-//          context: context,
-//          builder: (context) => AlertDialog(
-//            content: ListTile(
-//              title: Text(message['notification']['title']),
-//              subtitle: Text(message['notification']['body']),
-//            ),
-//            actions: <Widget>[
-//              FlatButton(
-//                  onPressed: () => Navigator.of(context).pop(),
-//                  child: Text("Ok")
-//              )
-//            ],
-//          )
-//        );
-//      },
-//    );
 
-    location.onLocationChanged().listen((LocationData cLoc) {
+    _location.onLocationChanged().listen((LocationData cLoc) {
       // cLoc contains the lat and long of the
       // current user's position in real time,
       // so we're holding on to it
       setState(() {
-        currentLocation = cLoc;
+        _currentLocation = cLoc;
+        if(_currentLocation!=null){
+          double dist = getDistance(_currentLocation);
+          print("This is my distance: " + dist.toString());
+          if(dist > 200 && isAtHome){
+            _NotificationWithoutSoundWearMask();
+            isAtHome = false;
+          }
+          if(dist < 200 && !isAtHome){
+            _NotificationWithoutSoundWashHands();
+            isAtHome = true;
+          }
+        }
       });
     });
+  }
+
+  double getDistance(LocationData l) {
+    print("finding distance");
+
+    var p = 0.017453292519943295;
+    var c = cos;
+    var lat2 = l.latitude;
+    var lat1 = _shreyasHome.target.latitude;
+
+    var lon2 = l.longitude;
+    var lon1 = _shreyasHome.target.longitude;
+
+    var a = 0.5 - c((lat2 - lat1) * p)/2 +
+        c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p))/2;
+    return 12742000 * asin(sqrt(a));
   }
 
   Future _onSelectNotification(String payload) async {
@@ -89,7 +103,7 @@ class MapSampleState extends State<MapSample> {
     );
   }
 
-  Future _showNotificationWithoutSound() async {
+  Future _NotificationWithoutSoundWearMask() async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         'your channel id', 'your channel name', 'your channel description',
         playSound: false, importance: Importance.Max, priority: Priority.High);
@@ -99,45 +113,62 @@ class MapSampleState extends State<MapSample> {
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await _flutterLocalNotificationsPlugin.show(
       0,
-      'New Post',
-      'How to Show Notification in Flutter',
+      'Reminder',
+      'Wear a mask before leaving the house!',
       platformChannelSpecifics,
       payload: 'No_Sound',
     );
   }
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.0857496559620),
-    zoom: 14.4746,
-  );
+  Future _NotificationWithoutSoundWashHands() async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'your channel id', 'your channel name', 'your channel description',
+        playSound: false, importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics =
+    new IOSNotificationDetails(presentSound: false);
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      'Reminder',
+      'Wash hands when entering the home!',
+      platformChannelSpecifics,
+      payload: 'No_Sound',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
-            height: 100,
-            child: InkWell(
-              onTap: _showNotificationWithoutSound,
-            ),
-          ),
+//          Container(
+//            height: 100,
+//            child: InkWell(
+//              onTap: _showNotificationWithoutSound,
+//            ),
+//          ),
           Container(
             height: 500,
             child: GoogleMap(
               mapType: MapType.hybrid,
-              initialCameraPosition: _kGooglePlex,
+              initialCameraPosition: _shreyasHome,
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
             ),
           ),
-          (currentLocation == null)
+
+          Text("Distance From home: " + ((_currentLocation!=null)?(getDistance(_currentLocation)).toString():"null")),
+
+          Text("Home lat: " + _shreyasHome.target.latitude.toString() + "      Home Lon: " + _shreyasHome.target.longitude.toString()),
+
+          (_currentLocation == null)
               ? Text("nothing yet")
               : Text("Current Lat: " +
-              currentLocation.latitude.toString() +
+              _currentLocation.latitude.toString() +
               "      Current Lon: " +
-              currentLocation.longitude.toString())
+              _currentLocation.longitude.toString())
         ],
       ),
 
