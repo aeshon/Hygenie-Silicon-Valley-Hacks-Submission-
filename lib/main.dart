@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Google Maps Demo',
-      home: MapSample(),
+      home: LandingPage(),
     );
   }
 }
@@ -101,10 +101,12 @@ class LandingPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    Route route = MaterialPageRoute(builder: (context) => MainPage());
     return new Material(
+
       color: Colors.lightBlue,
       child: new InkWell(
-        onTap: () => print("We tapped"),
+        onTap: () => Navigator.push(context, route),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -115,16 +117,16 @@ class LandingPage extends StatelessWidget{
       ),
     );
   }
-
 }
 
-class mainPage extends StatelessWidget{
+class MainPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('COVID-19 Assistant')
+        title: Text('COVID-19 Assistant'),
+        backgroundColor: Colors.lightBlue,
       ),
       body: Center(
         child: Column(
@@ -134,12 +136,23 @@ class mainPage extends StatelessWidget{
                 icon: Icon(
                   Icons.calendar_today
                 ),
-                label: Text('Schedule Activities'))
+                label: Text('Schedule Activities')
+            ),
+            new RaisedButton.icon(
+                onPressed: null,
+                icon: Icon(
+                  Icons.edit_location
+                ),
+                label: Text('Configure Location')),
+            new RaisedButton.icon(
+                onPressed: null,
+                icon: Icon(
+                  Icons.search
+                ),
+                label: Text('How to make your own PPE!'))
           ],
         ),
       ),
-
     );
   }
-
 }
