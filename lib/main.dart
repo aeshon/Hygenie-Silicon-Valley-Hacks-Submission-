@@ -103,7 +103,6 @@ class LandingPage extends StatelessWidget{
   Widget build(BuildContext context) {
     Route route = MaterialPageRoute(builder: (context) => MainPage());
     return new Material(
-
       color: Colors.lightBlue,
       child: new InkWell(
         onTap: () => Navigator.push(context, route),
