@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:covidnotifassistant/useraddress.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,14 +8,15 @@ import 'ScheduleGroceriesPage.dart';
 import 'ConfigureLocationPage.dart';
 import 'ConfigureSettingsPage.dart';
 import 'FindPPEPage.dart';
+import 'covidessentials.dart';
 
 class MainPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
     Route route1 = MaterialPageRoute(builder: (context) => ScheduleGroceriesPage());
-    Route route2 = MaterialPageRoute(builder: (context) => ConfigureLocationPage());
-    Route route3 = MaterialPageRoute(builder: (context) => FindPPEPage());
+    Route route2 = MaterialPageRoute(builder: (context) => UserAddress());
+    Route route3 = MaterialPageRoute(builder: (context) => FindPPE());
     Route route4 = MaterialPageRoute(builder: (context) => ConfigureSettingsPage());
     return Scaffold(
       appBar: AppBar(
