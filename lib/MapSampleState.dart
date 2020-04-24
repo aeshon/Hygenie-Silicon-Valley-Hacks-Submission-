@@ -13,14 +13,9 @@ class MapSampleState extends State<MapSample> {
   LocationData _currentLocation;
   Location _location;
   FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-  double _distanceBetween;
   bool isAtHome = true;
   static final CameraPosition _shreyasHome = CameraPosition(
     target: LatLng(37.2718878,-122.0225271),
-    zoom: 14.4746,
-  );
-  static final CameraPosition _shreyasNeighborHome = CameraPosition(
-    target: LatLng(37.2719611,-122.0238443),
     zoom: 14.4746,
   );
 
@@ -79,8 +74,8 @@ class MapSampleState extends State<MapSample> {
     showDialog(
       context: context,
       builder: (_) => new AlertDialog(
-        title: const Text("Here is your payload"),
-        content: new Text("Payload: $payload"),
+        title: const Text("Thanks for staying safe!"),
+//        content: new Text("Payload: $payload"),
       ),
     );
   }
