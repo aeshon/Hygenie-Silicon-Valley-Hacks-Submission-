@@ -15,11 +15,22 @@ class UserAddressState extends State<UserAddress> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Address"),
+          title: new Center(
+              child: new Text('Location', textAlign: TextAlign.center)),
         ),
         body: Card(
           child: new Column(
             children: <Widget>[
+              Spacer(
+                flex: 2,
+              ),
+              Text("Please enter your address to configure location settings",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue)),
+              Spacer(),
               Form(
                 key: formKey,
                 child: Column(
@@ -27,8 +38,6 @@ class UserAddressState extends State<UserAddress> {
                   children: <Widget>[
                     TextFormField(
                       decoration: InputDecoration(labelText: 'Address:'),
-                      //validator: (input) =>
-                      // !input.contains('@') ? 'Not a valid Email' : null,
                       onSaved: (input) => userAddress = input,
                     ),
                     Row(
@@ -47,6 +56,9 @@ class UserAddressState extends State<UserAddress> {
                     )
                   ],
                 ),
+              ),
+              Spacer(
+                flex: 2,
               ),
             ],
           ),

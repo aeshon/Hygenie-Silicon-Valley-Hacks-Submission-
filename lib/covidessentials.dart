@@ -24,7 +24,10 @@ class FindPPE extends StatelessWidget {
           children: <Widget>[
             Spacer(),
             Text('Masks',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue)),
             RaisedButton(
               child: Text(
                   'Make your own mask! \n'
@@ -36,8 +39,13 @@ class FindPPE extends StatelessWidget {
               },
             ),
             Spacer(),
-            Text('Gloves',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            Text(
+              'Gloves',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
+            ),
             RaisedButton(
               child: Text('Find some on Amazon!'),
               onPressed: () {
@@ -47,7 +55,10 @@ class FindPPE extends StatelessWidget {
             ),
             Spacer(),
             Text('Hand Sanitizer',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue)),
             RaisedButton(
               child: Text(
                   'Make your own hand sanitizer! \n Click to learn more!',
