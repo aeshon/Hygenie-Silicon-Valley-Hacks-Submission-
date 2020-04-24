@@ -22,6 +22,8 @@ dependencies:
   google_maps_flutter:
   location:
   fluttertoast:
+  table_calendar: ^2.2.3
+  url_launcher:
   firebase_messaging:
   firebase_core:
   firebase_auth:
