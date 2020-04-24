@@ -45,7 +45,7 @@ class MainPage extends StatelessWidget{
               minWidth: 200.0,
               height: 100.0,
               child: RaisedButton.icon(
-                onPressed: () => Navigator.push(context, route1),
+                onPressed: () => Navigator.push(context, route2),
                 color: Colors.lightBlue,
                 icon: Icon(
                   Icons.edit_location,
@@ -60,7 +60,7 @@ class MainPage extends StatelessWidget{
               minWidth: 200.0,
               height: 100.0,
               child: RaisedButton.icon(
-                onPressed: () => Navigator.push(context, route1),
+                onPressed: () => Navigator.push(context, route3),
                 color: Colors.lightBlue,
                 icon: Icon(
                   Icons.search,
