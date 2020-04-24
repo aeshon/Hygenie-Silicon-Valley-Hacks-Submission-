@@ -148,11 +148,12 @@ class MainPage extends StatelessWidget{
                       icon: Icon(
                           Icons.local_grocery_store,
                           color: Colors.white,
+                          size: 30,
                       ),
                       label: Text('Grocery Deliveries', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
                 ),
             ),
-            new SizedBox(height: 60),
+            new SizedBox(height: 30),
             new ButtonTheme(
               minWidth: 200.0,
               height: 100.0,
@@ -162,11 +163,12 @@ class MainPage extends StatelessWidget{
                 icon: Icon(
                     Icons.edit_location,
                     color: Colors.white,
+                    size: 30,
                 ),
                 label: Text('Configure Location', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
               ),
             ),
-            new SizedBox(height: 60),
+            new SizedBox(height: 30),
             new ButtonTheme(
               minWidth: 200.0,
               height: 100.0,
@@ -176,8 +178,24 @@ class MainPage extends StatelessWidget{
                 icon: Icon(
                     Icons.search,
                     color: Colors.white,
+                    size: 30,
                 ),
                 label: Text('How to get/make PPE', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
+              ),
+            ),
+            new SizedBox(height: 30),
+            new ButtonTheme(
+              minWidth: 200.0,
+              height: 100.0,
+              child: RaisedButton.icon(
+                onPressed: () => Navigator.push(context, route1),
+                color: Colors.lightBlue,
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                label: Text('Configure Settings', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
               ),
             ),
           ],
