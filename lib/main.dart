@@ -129,6 +129,7 @@ class MainPage extends StatelessWidget{
     Route route1 = MaterialPageRoute(builder: (context) => ScheduleGroceriesPage());
     Route route2 = MaterialPageRoute(builder: (context) => ConfigureLocationPage());
     Route route3 = MaterialPageRoute(builder: (context) => FindPPEPage());
+    Route route4 = MaterialPageRoute(builder: (context) => ConfigureSettingsPage());
     return Scaffold(
       appBar: AppBar(
         title: Text('COVID-19 Assistant', textAlign: TextAlign.center),
@@ -188,7 +189,7 @@ class MainPage extends StatelessWidget{
               minWidth: 200.0,
               height: 100.0,
               child: RaisedButton.icon(
-                onPressed: () => Navigator.push(context, route1),
+                onPressed: () => Navigator.push(context, route4),
                 color: Colors.lightBlue,
                 icon: Icon(
                   Icons.settings,
@@ -257,6 +258,16 @@ class ScheduleGroceriesPage extends StatelessWidget{
 }
 
 class ConfigureLocationPage extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
+
+}
+
+class ConfigureSettingsPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
