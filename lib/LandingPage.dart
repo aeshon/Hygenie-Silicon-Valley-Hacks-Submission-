@@ -4,16 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:covidnotifassistant/MainPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LandingPage extends StatelessWidget{
 
+  Route _route = MaterialPageRoute(builder: (context) => MainPage());
+
   @override
   Widget build(BuildContext context) {
-    Route route = MaterialPageRoute(builder: (context) => MainPage());
+
     return new Material(
       color: Colors.lightBlue,
       child: new InkWell(
-        onTap: () => Navigator.push(context, route),
+        onTap: () => Navigator.push(context, _route),
         child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

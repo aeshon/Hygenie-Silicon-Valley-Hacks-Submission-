@@ -1,16 +1,129 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:covidnotifassistant/useraddress.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'ScheduleGroceriesPage.dart';
-import 'ConfigureLocationPage.dart';
 import 'ConfigureSettingsPage.dart';
 import 'FindPPEPage.dart';
 import 'covidessentials.dart';
 
-class MainPage extends StatelessWidget{
+class MainPage extends StatefulWidget {
+  @override
+  State<MainPage> createState() => MainPageState();
+}
+
+
+class MainPageState extends State<MainPage>{
+
+  LocationData _currentLocation;
+  Location _location;
+  FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  bool isAtHome = true;
+
+  void initState() {
+    super.initState();
+
+    _location = new Location();
+
+    var initializationSettingsAndroid = new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(initializationSettingsAndroid, initializationSettingsIOS);
+    _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+
+    _flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: _onSelectNotification);
+
+    _location.onLocationChanged().listen((LocationData cLoc) {
+      // cLoc contains the lat and long of the
+      // current user's position in real time,
+      // so we're holding on to it
+      setState(() {
+        _currentLocation = cLoc;
+        if(_currentLocation!=null){
+          getDistance(_currentLocation).then((dist){
+            print("This is my distance: " + dist.toString());
+            if(dist > 15 && isAtHome){
+              _NotificationWithoutSoundWearMask();
+              isAtHome = false;
+            }
+            if(dist < 15 && !isAtHome){
+              _NotificationWithoutSoundWashHands();
+              isAtHome = true;
+            }
+          });
+        }
+      });
+    });
+  }
+
+  Future<double> getDistance(LocationData l) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String myLatLong = prefs.getString("latlon");
+    var latlon = myLatLong.split(" ");
+    print("finding distance");
+
+    var p = 0.017453292519943295;
+    var c = cos;
+    var lat2 = l.latitude;
+    var lat1 = double.parse(latlon[0]);
+
+    var lon2 = l.longitude;
+    var lon1 = double.parse(latlon[1]);
+
+    var a = 0.5 - c((lat2 - lat1) * p)/2 +
+        c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p))/2;
+    return 12742000 * asin(sqrt(a));
+  }
+
+  Future _onSelectNotification(String payload) async {
+    showDialog(
+      context: context,
+      builder: (_) => new AlertDialog(
+        title: const Text("Thanks for staying safe!"),
+//        content: new Text("Payload: $payload"),
+      ),
+    );
+  }
+
+  Future _NotificationWithoutSoundWearMask() async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'your channel id', 'your channel name', 'your channel description',
+        playSound: false, importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics =
+    new IOSNotificationDetails(presentSound: false);
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      'Reminder',
+      'Wear a mask before leaving the house!',
+      platformChannelSpecifics,
+      payload: 'No_Sound',
+    );
+  }
+
+  Future _NotificationWithoutSoundWashHands() async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+        'your channel id', 'your channel name', 'your channel description',
+        playSound: false, importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics =
+    new IOSNotificationDetails(presentSound: false);
+    var platformChannelSpecifics = new NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      'Reminder',
+      'Wash hands when entering the home!',
+      platformChannelSpecifics,
+      payload: 'No_Sound',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
