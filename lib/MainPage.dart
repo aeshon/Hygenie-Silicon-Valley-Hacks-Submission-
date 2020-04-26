@@ -10,7 +10,6 @@ import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'ScheduleGroceriesPage.dart';
 import 'ConfigureSettingsPage.dart';
-import 'FindPPEPage.dart';
 import 'covidessentials.dart';
 
 class MainPage extends StatefulWidget {
