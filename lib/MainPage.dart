@@ -46,11 +46,11 @@ class MainPageState extends State<MainPage>{
         if(_currentLocation!=null){
           getDistance(_currentLocation).then((dist){
             print("This is my distance: " + dist.toString());
-            if(dist > 30 && isAtHome){
+            if(dist > 15 && isAtHome){
               _NotificationWithoutSoundWearMask();
               isAtHome = false;
             }
-            if(dist < 30 && !isAtHome){
+            if(dist < 15 && !isAtHome){
               _NotificationWithoutSoundWashHands();
               isAtHome = true;
             }

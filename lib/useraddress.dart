@@ -72,36 +72,44 @@ class UserAddressState extends State<UserAddress> {
                 Text("Please click 'Configure' to set your home address",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue)),
                 Spacer(),
-                RaisedButton(
-                  onPressed: () {
-                    //ENTER LOCATION CODE HERE
-                    if(_currLocation==null){
-                      final snackBar = SnackBar(
-                        content: Text('Error! try again!'),
-                      );
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    } else {
-                      final snackBar = SnackBar(
-                        content: Text('Location has been configured'),
-                      );
-                      _setHome().then((onValue){
+                new ButtonTheme(
+                  minWidth: 180.0,
+                  height: 100.0,
+                  child: RaisedButton(
+                    onPressed: () {
+                      //ENTER LOCATION CODE HERE
+                      if(_currLocation==null){
+                        final snackBar = SnackBar(
+                          content: Text('Error! try again!', style: new TextStyle(color: Colors.lightBlue, fontSize: 30, fontWeight: FontWeight.bold)),
+                        );
                         Scaffold.of(context).showSnackBar(snackBar);
-                      });
-                    }
-                  },
-                  child: Text('Configure'),
+                      } else {
+                        final snackBar = SnackBar(
+                          content: Text('Location has been configured', style: new TextStyle(color: Colors.lightBlue, fontSize: 30, fontWeight: FontWeight.bold)),
+                        );
+                        _setHome().then((onValue){
+                          Scaffold.of(context).showSnackBar(snackBar);
+                        });
+                      }
+                    },
+                    child: Text('Configure', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
+                  ),
                 ),
-                RaisedButton(
-                  onPressed: () {
-                    //return to MainPage
-                    Navigator.push(context, route1);
-                  },
-                  child: Text('Back'),
-                ),
+                new ButtonTheme(
+                  minWidth: 180.0,
+                  height: 100.0,
+                  child: RaisedButton(
+                      onPressed: () {
+                        //return to MainPage
+                        Navigator.push(context, route1);
+                      },
+                      child: Text('Back', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
+                    ),
+                )
               ],
             ),
           ),
