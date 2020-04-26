@@ -1,5 +1,6 @@
 import 'package:covidnotifassistant/MainPage.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart' as geolib;
 import 'package:location/location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,13 +11,24 @@ class UserAddress extends StatefulWidget {
 
 class UserAddressState extends State<UserAddress> {
 
+
   Location _location;
   LocationData _currLocation;
 
+  _getCurrentLatitude() async {
+    final position = await geolib.Geolocator().getCurrentPosition(desiredAccuracy: geolib.LocationAccuracy.best);
+    return(position.latitude);
+  }
+
+  _getCurrentLongitude() async {
+    final position = await geolib.Geolocator().getCurrentPosition(desiredAccuracy: geolib.LocationAccuracy.best);
+    return(position.longitude);
+  }
+
   Future _setHome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(_currLocation.latitude.toString() + " " + _currLocation.longitude.toString());
-    await prefs.setString('latlon', _currLocation.latitude.toString() + " " + _currLocation.longitude.toString());
+    //await prefs.setString('latlon', _currLocation.latitude.toString() + " " + _currLocation.longitude.toString());
+    await prefs.setString('latlon', _getCurrentLatitude().toString() + " " + _getCurrentLongitude().toString());
   }
 
   void initState(){
@@ -72,9 +84,6 @@ class UserAddressState extends State<UserAddress> {
                     }
                   },
                   child: Text('Configure'),
-                ),
-                Spacer(
-                  flex: 3,
                 ),
                 RaisedButton(
                   onPressed: () {
