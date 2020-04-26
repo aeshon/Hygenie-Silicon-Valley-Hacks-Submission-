@@ -15,12 +15,12 @@ class UserAddressState extends State<UserAddress> {
   Location _location;
   LocationData _currLocation;
 
-  _getCurrentLatitude() async {
+  Future<double> _getCurrentLatitude() async {
     final position = await geolib.Geolocator().getCurrentPosition(desiredAccuracy: geolib.LocationAccuracy.best);
     return(position.latitude);
   }
 
-  _getCurrentLongitude() async {
+  Future <double> _getCurrentLongitude() async {
     final position = await geolib.Geolocator().getCurrentPosition(desiredAccuracy: geolib.LocationAccuracy.best);
     return(position.longitude);
   }
@@ -28,7 +28,17 @@ class UserAddressState extends State<UserAddress> {
   Future _setHome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //await prefs.setString('latlon', _currLocation.latitude.toString() + " " + _currLocation.longitude.toString());
-    await prefs.setString('latlon', _getCurrentLatitude().toString() + " " + _getCurrentLongitude().toString());
+
+    String x = "";
+    _getCurrentLatitude().then((lat){
+      x+= lat.toString() + " ";
+      _getCurrentLongitude().then((lon) async {
+        x+=lon.toString();
+        print(x);
+        await prefs.setString('latlon', x);
+      });
+    });
+
   }
 
   void initState(){
