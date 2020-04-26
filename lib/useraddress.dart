@@ -66,16 +66,14 @@ class UserAddressState extends State<UserAddress> {
           builder: (context) => Center(
             child: new Column(
               children: <Widget>[
-                Spacer(
-                  flex: 3,
-                ),
-                Text("Please click 'Configure' to set your home address",
+                new SizedBox(height: 60),
+                Text("Please click 'Configure' to set home address",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue)),
-                Spacer(),
+                new SizedBox(height: 60),
                 new ButtonTheme(
                   minWidth: 180.0,
                   height: 100.0,
@@ -99,6 +97,7 @@ class UserAddressState extends State<UserAddress> {
                     child: Text('Configure', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
                 ),
+                new SizedBox(height: 60),
                 new ButtonTheme(
                   minWidth: 180.0,
                   height: 100.0,

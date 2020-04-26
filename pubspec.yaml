@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   google_maps_flutter:
   location:
   fluttertoast:
@@ -57,6 +58,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/hygenie.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
