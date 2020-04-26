@@ -26,7 +26,7 @@ class ScheduleGroceriesPage extends StatelessWidget{
                 child: RaisedButton(
                   onPressed: () => launch('https://grocery.walmart.com/'),
                   color: Colors.lightBlue,
-                  child: Text('Walmart Grocery (Economical)', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
+                  child: Text('Walmart (Economical)', style: new TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold)),
                 )
             ),
             new SizedBox(height: 60),
