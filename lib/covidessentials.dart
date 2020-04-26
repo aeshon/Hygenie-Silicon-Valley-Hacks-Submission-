@@ -36,7 +36,7 @@ class FindPPE extends StatelessWidget {
                 child: Text(
                     'Make your own mask! \n'
                     'Click to learn more!',
-                    textAlign: TextAlign.center),
+                    textAlign: TextAlign.center, style: new TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                 onPressed: () {
                   launchURL(
                       "https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/cloth-face-cover.html");
@@ -56,7 +56,7 @@ class FindPPE extends StatelessWidget {
               height: 75,
               child: RaisedButton(
                 color: Colors.lightBlue,
-                child: Text('Find some on Amazon!'),
+                child: Text('Find some on Amazon!', style: new TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                 onPressed: () {
                   launchURL(
                       "https://www.amazon.com/s?k=gloves+health&rh=n%3A3753541&ref=nb_sb_noss");
@@ -76,7 +76,7 @@ class FindPPE extends StatelessWidget {
                 color: Colors.lightBlue,
                 child: Text(
                     'Make your own hand sanitizer! \n Click to learn more!',
-                    textAlign: TextAlign.center),
+                    textAlign: TextAlign.center, style: new TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                 onPressed: () {
                   launchURL(
                       "https://www.healthline.com/health/how-to-make-hand-sanitizer");

@@ -20,7 +20,8 @@ class LandingPage extends StatelessWidget{
         child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Welcome to the COVID Assistant!", textAlign: TextAlign.center, style: new TextStyle(color: Colors.white, fontSize: 35.0, fontWeight: FontWeight.bold),),
+              Image.asset('assests/images/hygenie.jpg'),
+              new Text("Welcome to the HyGenie COVID-19 Assistant!", textAlign: TextAlign.center, style: new TextStyle(color: Colors.white, fontSize: 35.0, fontWeight: FontWeight.bold),),
               new SizedBox(height: 20),
               new Text("Tap anywhere to continue", textAlign: TextAlign.center, style: new TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),)
             ]

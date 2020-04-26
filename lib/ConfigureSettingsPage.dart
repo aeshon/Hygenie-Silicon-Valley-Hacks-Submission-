@@ -7,8 +7,14 @@ class ConfigureSettingsPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return Scaffold(
+      appBar: AppBar(
+        title: new Center(
+            child: Text("Coming Soon!",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white)),
+        ),
+      ),
+    );
   }
 
 }

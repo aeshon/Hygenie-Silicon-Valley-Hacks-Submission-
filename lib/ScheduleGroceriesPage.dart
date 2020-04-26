@@ -19,7 +19,7 @@ class ScheduleGroceriesPage extends StatelessWidget{
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new SizedBox(height: 100),
+            new SizedBox(height: 50),
             new ButtonTheme(
                 minWidth: 200.0,
                 height: 100.0,
